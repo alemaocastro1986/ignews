@@ -1,0 +1,107 @@
+@mixin scrollbars(
+  $size,
+  $foreground-color,
+  $background-color: mix($foreground-color, white, 50%)
+) {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+    border-radius: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    margin: 0.5rem auto;
+    background: $background-color;
+  }
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}
+
+.postContainer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: calc(100vh - 5rem);
+  overflow: hidden;
+  overflow-y: scroll;
+
+  @include scrollbars(0.5rem, var(--gray-900), var(--gray-900));
+  &:hover {
+    visibility: visible;
+    overflow-y: scroll;
+    @include scrollbars(0.5rem, var(--gray-850), var(--gray-900));
+  }
+}
+
+.post {
+  max-width: 720px;
+  margin: 5rem auto 0;
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+  }
+
+  time {
+    display: block;
+    font-size: 1rem;
+    color: var(--gray-300);
+    margin-top: 1.5rem;
+  }
+
+  .postContent {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    line-height: 1.8rem;
+    color: var(--gray-100);
+
+    p,
+    ul {
+      margin: 1.5rem 0;
+    }
+
+    em {
+      font-weight: 300;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      li {
+        margin: 0.5rem 0;
+      }
+    }
+
+    &.previewContent {
+      background: linear-gradient(var(--gray-100), transparent);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  .continueReading {
+    padding: 2rem;
+    text-align: center;
+    background: var(--gray-850);
+    border-radius: 100px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 4rem 0 2rem;
+
+    a {
+      color: var(--yellow-500);
+      margin-left: 0.25rem;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
